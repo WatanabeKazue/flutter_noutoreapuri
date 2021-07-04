@@ -15,19 +15,24 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     setMenuItems();
     _numberOfQuestions = _memuItems[0].value!;
-
-
-
   }
 
   void setMenuItems() {
-   _memuItems.add(DropdownMenuItem)
+    _memuItems.add(DropdownMenuItem(value:10,child: Taxt("10"),));
+    _memuItems.add(DropdownMenuItem(value:20,child: Taxt("20"),));
+    _memuItems.add(DropdownMenuItem(value:30,child: Taxt("30"),));
   }
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
+    var screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
     print("ヨコ幅の論理ピクセル；$screenWidth");
     print("タテ幅の論理ピクセル；$screenHeight");
 
@@ -39,10 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 16.0,),
             Text("問題を選択して「スタート」ボタンを押してください"),
             //TODO プルダウン選択肢
-            DropdownButton(items:[
-              DropdownMenuItem(child:child)
-            ])
-            ),
+            DropdownButton(items: [
+
+            ]),
             Expanded(
               child: Container(
                 alignment: Alignment.bottomCenter,

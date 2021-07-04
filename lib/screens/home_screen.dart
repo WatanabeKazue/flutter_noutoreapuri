@@ -8,13 +8,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<DropdownMenuItem<int>> _memuItems = [];
-  int _numberOfQuestions = _memuItems[0].value!;
+  int _numberOfQuestions = 0;
 
   @override
   void initState() {
     super.initState();
     setMenuItems();
-    _numberOfQues
+    _numberOfQuestions
+
+    int _numberOfQuestions = _memuItems[0].value!;
+
   }
 
   void setMenuItems() {

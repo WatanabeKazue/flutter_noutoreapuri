@@ -5,9 +5,9 @@ import 'package:flutter_noutoreapuri/screens/test_screen.dart';
 class HomeScreen extends StatefulWidget {
 
   final numberOfQuestions;
-  final param_b;
-  final param_c;
-  final param_d;
+  //final param_b;
+  //final param_c;
+  //final param_d;
 
   TestScreen ();
   @override

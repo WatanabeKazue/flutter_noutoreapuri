@@ -14,9 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     setMenuItems();
-    _numberOfQuestions
+    _numberOfQuestions = _memuItems[0].value!;
 
-    int _numberOfQuestions = _memuItems[0].value!;
+
 
   }
 
@@ -39,8 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 16.0,),
             Text("問題を選択して「スタート」ボタンを押してください"),
             //TODO プルダウン選択肢
-            DropdownButton(
-              items: [DropdownMenuItem(child: child)],
+            DropdownButton(items:[
+              DropdownMenuItem(child:child)
+            ])
             ),
             Expanded(
               child: Container(

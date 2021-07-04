@@ -18,9 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void setMenuItems() {
-    _memuItems.add(DropdownMenuItem(value:10,child: Taxt("10"),));
-    _memuItems.add(DropdownMenuItem(value:20,child: Taxt("20"),));
-    _memuItems.add(DropdownMenuItem(value:30,child: Taxt("30"),));
+    _memuItems.add(DropdownMenuItem(value:10,child: Text("10"),));
+    _memuItems.add(DropdownMenuItem(value:20,child: Text("20"),));
+    _memuItems.add(DropdownMenuItem(value:30,child: Text("30"),));
   }
 
   @override
@@ -44,9 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 16.0,),
             Text("問題を選択して「スタート」ボタンを押してください"),
             //TODO プルダウン選択肢
-            DropdownButton(items: [
-
-            ]),
+            DropdownButton(
+                items: _memuItems,
+            ),
             Expanded(
               child: Container(
                 alignment: Alignment.bottomCenter,

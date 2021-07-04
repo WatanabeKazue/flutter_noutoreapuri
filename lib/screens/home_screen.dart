@@ -51,12 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
                  onChanged: (int? selectedValue){
                   setState(() {
                     _numberOfQuestions = selectedValue!;
-
                   });
                  },
-
-
-                onChanged: (value) => print(value.toString()),
             ),
             Expanded(
               child: Container(

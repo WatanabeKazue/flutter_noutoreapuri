@@ -1,7 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_noutoreapuri/screens/test_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+
+  final numberOfQuestions;
+  final param_b;
+  final param_c;
+  final param_d;
+
+  TestScreen ();
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -19,9 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void setMenuItems() {
     //この中は、先生の動画と表示が違ってもOK
-    _memuItems.add(DropdownMenuItem(value:10,child: Text("10"),));
-    _memuItems.add(DropdownMenuItem(value:20,child: Text("20"),));
-    _memuItems.add(DropdownMenuItem(value:30,child: Text("30"),));
+    _memuItems.add(DropdownMenuItem(value: 10, child: Text("10"),));
+    _memuItems.add(DropdownMenuItem(value: 20, child: Text("20"),));
+    _memuItems.add(DropdownMenuItem(value: 30, child: Text("30"),));
   }
 
   @override
@@ -46,13 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("問題を選択して「スタート」ボタンを押してください"),
             //TODO プルダウン選択肢
             DropdownButton(
-                items: _memuItems,
-                value: _numberOfQuestions,
-                 onChanged: (int? selectedValue){
-                  setState(() {
-                    _numberOfQuestions = selectedValue!;
-                  });
-                 },
+              items: _memuItems,
+              value: _numberOfQuestions,
+              onChanged: (int? selectedValue) {
+                setState(() {
+                  _numberOfQuestions = selectedValue!;
+                });
+              },
             ),
             Expanded(
               child: Container(
@@ -60,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.only(bottom: 16.0),
                 child: ElevatedButton.icon(
                   icon: Icon(Icons.skip_next),
-                  onPressed: () => startTestScreen("おしたで～"),
+                  onPressed: () => startTestScreen(context),
                   label: Text("スタート"),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.pink,
@@ -81,10 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-
-  startTestScreen(String s) {
-
+  startTestScreen(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => TestScreen(numberOfQuestions)));
   }
-
-
 }

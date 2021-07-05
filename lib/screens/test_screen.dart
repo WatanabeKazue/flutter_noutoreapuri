@@ -14,10 +14,10 @@ class _TestScreenState extends State<TestScreen> {
   late int numberOfCorrect = 0;
   late int correctRate = 0;
 
-  int questionLeft = 0;
-  int questionRight = 0;
-  String operator = "";
-  String answerString = "";
+  int questionLeft = 5;
+  int questionRight = 5;
+  String operator = "+";
+  String answerString = "10";
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +67,11 @@ class _TestScreenState extends State<TestScreen> {
 //TODO 問題表示部分
  Widget _questionPart() {
    return Row(children: [
-     Text(questionLeft.toString(),style: TextStyle(fontSize: 36.0),),
-     Text(operator,style: TextStyle(fontSize: 30.0),),
-     Text(questionRight.toString(),style: TextStyle(fontSize: 36.0),)
-     Text("=",style:  TextStyle(fontSize: 30.0),),
-     Text(answerString, style:  TextStyle(fontSize: 60.0),),
+     Expanded(flex: 2,child: Text(questionLeft.toString(),style: TextStyle(fontSize: 36.0),)),
+     Expanded(flex: 1,child: Text(operator,style: TextStyle(fontSize: 30.0),)),
+     Expanded(flex: 2,child: Text(questionRight.toString(), style: TextStyle(fontSize: 36.0),)),
+     Expanded(flex: 1,child: Text("=",style:  TextStyle(fontSize: 30.0),)),
+     Expanded(flex: 3,child: Text(answerString, style:  TextStyle(fontSize: 60.0),)),
      
      
      

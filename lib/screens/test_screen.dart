@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class TestScreen extends StatefulWidget {
   final numberOfQuestions;
 
-  TestScreen(this.numberOfQuestions);
+
+  TestScreen(this.param_b, this.param_c, this.param_d, this.numberOfQuestions});
+
 
   @override
   _TestScreenState createState() => _TestScreenState();

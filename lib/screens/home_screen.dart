@@ -4,8 +4,14 @@ import 'package:flutter_noutoreapuri/screens/test_screen.dart';
 
 class HomeScreen extends StatefulWidget {
 
+  final numberOfQuestions;
+
+  TestScreen({@required this.numberOfuestions});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -85,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   startTestScreen(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => TestScreen(_numberOfQuestions)));
+        context, MaterialPageRoute(builder: (context)
+    => TestScreen(numberOfQuestions: _numberOfQuestions,)));
   }
 }

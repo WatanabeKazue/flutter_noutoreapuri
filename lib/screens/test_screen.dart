@@ -12,8 +12,32 @@ class TestScreen extends StatefulWidget {
 class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text(widget.numberOfQuestions.toString()),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+            children: <Widget>[
+          //スコア表示部分
+          _scorePartU(),
+          //問題表示部分
+          _questionPart(),
+         //電卓ボタン部分
+          _calcButtons(),
+          //答え合わせボタン
+          _answerCheckButton(),
+           //戻るボタン
+          _backButton(),
+          //
+        ]),
+      ),
     );
   }
+
+  //TODO スコア表示部分
+ Widget _scorePartU() {}
+//TODO 問題表示部分
+ Widget _questionPart() {}
+
+ //TODO 電卓ボタン部分
+ Widget _calcButtons() {}
 }
 

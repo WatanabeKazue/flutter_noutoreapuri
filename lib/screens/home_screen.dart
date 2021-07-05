@@ -4,9 +4,6 @@ import 'package:flutter_noutoreapuri/screens/test_screen.dart';
 
 class HomeScreen extends StatefulWidget {
 
-  final numberOfQuestions;
-
-  TestScreen({@required this.numberOfuestions});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();

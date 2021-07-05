@@ -10,9 +10,14 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  int numberOfRemaining;
-  int numberOfCorrect;
-  int correctRate;
+  late int numberOfRemaining = 0;
+  late int numberOfCorrect = 0;
+  late int correctRate = 0;
+
+  int questionLeft = 0;
+  int questionRight = 0;
+  String operator = "";
+  string answerString = "";
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +41,7 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  //TODO スコア表示部分
+  //TODO スコア表示部分//156 動画
  Widget _scorePartU() {
     return Padding(padding: const EdgeInsets.only(left: 8.0, right: 8.0,top: 8.0 ),
      child: Table(
@@ -56,7 +61,8 @@ class _TestScreenState extends State<TestScreen> {
           ],
         ),
       ],
-    );// TODO ここではあとで書き換える
+     )
+    );
  }
 //TODO 問題表示部分
  Widget _questionPart() {

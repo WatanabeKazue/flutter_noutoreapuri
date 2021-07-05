@@ -17,7 +17,7 @@ class _TestScreenState extends State<TestScreen> {
   int questionLeft = 0;
   int questionRight = 0;
   String operator = "";
-  string answerString = "";
+  String answerString = "";
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,17 @@ class _TestScreenState extends State<TestScreen> {
  }
 //TODO 問題表示部分
  Widget _questionPart() {
-   return Container();// TODO ここではあとで書き換える
+   return Row(children: [
+     Text(questionLeft.toString(),style: TextStyle(fontSize: 36.0),),
+     Text(operator,style: TextStyle(fontSize: 30.0),),
+     Text(questionRight.toString(),style: TextStyle(fontSize: 36.0),)
+     Text("=",style:  TextStyle(fontSize: 30.0),),
+     Text(answerString, style:  TextStyle(fontSize: 60.0),),
+     
+     
+     
+     
+   ],);// TODO ここではあとで書き換える
  }
 
  //TODO 電卓ボタン部分

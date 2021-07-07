@@ -81,23 +81,47 @@ class _TestScreenState extends State<TestScreen> {
 
  //TODO 電卓ボタン部分
  Widget _calcButtons() {
-   return Container();// TODO ここではあとで書き換える
+   return Table(
+     children: [
+       TableRow(
+         children: [_calcButtons(),]
+       ),
+       TableRow(),
+       TableRow(),
+       TableRow(),
+     ],
+   );// TODO ここではあとで書き換える
  }
 
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: RaisedButton(
-      onPressed: null,
-      child: Text ("答え合わせ",style: TextStyle(fontSize: 14.0),),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: RaisedButton(
+        onPressed: null,
+        child: Text ("答え合わせ",style: TextStyle(fontSize: 14.0),),
+        ),
       ),
     );// TODO ここではあとで書き換える
   }
 
   //TODO 戻る
   Widget _backButton() {
-    return Container();// TODO ここではあとで書き換える
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0,right: 8.0,bottom: 8.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.purple,
+          ),
+          onPressed: null,//TODO
+          child: Text("もどる",style: TextStyle(fontSize: 14.0),),
+        ),
+      ),
+    );// TODO ここではあとで書き換える
   }
 }
 

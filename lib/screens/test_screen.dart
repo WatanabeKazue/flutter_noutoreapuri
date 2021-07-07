@@ -84,15 +84,54 @@ class _TestScreenState extends State<TestScreen> {
    return Table(
      children: [
        TableRow(
-         children: [_calcButtons(),]
+         children: [
+           _calcButton(),
+           _calcButton(),
+           _calcButton(),
+         ]
        ),
-       TableRow(),
-       TableRow(),
-       TableRow(),
-     ],
-   );// TODO ここではあとで書き換える
+       TableRow(
+           children: [
+             _calcButton(),
+             _calcButton(),
+             _calcButton(),
+           ]
+       ),
+       TableRow(
+           children: [
+             _calcButton(),
+             _calcButton(),
+             _calcButton(),
+           ]
+       ),
+       TableRow(
+           children: [
+             _calcButton(),
+             _calcButton(),
+             _calcButton(),
+           ]
+       ),
+       TableRow(
+           children: [
+             _calcButton("7"),
+             _calcButton("8"),
+             _calcButton("9"),
+           ]
+       ),
+       TableRow(
+           children: [
+             _calcButton("4"),
+             _calcButton("5"),
+             _calcButton("6"),
+           ]
+       ),
+       TableRow(
+           children: [
+             _calcButton(),
+             _calcButton(),
+             _calcButton(),
+           ]
  }
-
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
     return Padding(
@@ -123,5 +162,7 @@ class _TestScreenState extends State<TestScreen> {
       ),
     );// TODO ここではあとで書き換える
   }
+
+
 }
 

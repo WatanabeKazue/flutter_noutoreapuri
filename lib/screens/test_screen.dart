@@ -24,41 +24,49 @@ class _TestScreenState extends State<TestScreen> {
     return SafeArea(
       child: Scaffold(
         body: Stack(
-            children: <Widget>[
-        Column(
-          //スコア表示部分
-          _scorePartU(),
-          //問題表示部分
-          _questionPart(),
-          //電卓ボタン部分
-          _calcButtons(),
-          //答え合わせボタン
-          _answerCheckButton(),
-          //戻るボタン
-          _backButton(),
-          //
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                _scorePart(),
+                //問題表示部分
+                _questionPart(),
+                //電卓ボタン部分
+                _calcButtons(),
+                //答え合わせボタン
+                _answerCheckButton(),
+                //戻るボタン
+                _backButton(),
+              ],
+              //スコア表示部分
 
-    ),
-        //〇・×画像
-        _correctIncorrectImage(),
-              //テスト終了メッセージ
-              _endMessage(),
-      ],
+              //
+            ),
+            //〇・×画像
+            _correctIncorrectImage(),
+            //テスト終了メッセージ
+            _endMessage(),
+          ],
         ),
       ),
     );
   }
- //TODO 〇・バツ画像
+
+  //TODO 〇・バツ画像
   Widget _correctIncorrectImage() {
+    if(isCorrectInCorrectImageEnabled == true){
     return Center(child: Image.asset("assets/images/pic_correct.png"));
-  }
+  }else{
+      return Container();
+    }
+    }
 
   //TODO テスト終了メッセージ
   Widget _endMessage() {
-    return Text("テスト終了");
+    return Center(child: Text("テスト終了",style: TextStyle(fontSize: 40.0),));
   }
+
   //TODO スコア表示部分//156 動画
-  Widget _scorePartU() {
+  Widget _scorePart() {
     return Padding(
         padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
         child: Table(
@@ -145,7 +153,7 @@ class _TestScreenState extends State<TestScreen> {
   Widget _calcButtons() {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 50.0 ),
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 50.0),
         child: Table(children: [
           TableRow(children: [
             _calcButton("7"),
@@ -177,10 +185,14 @@ class _TestScreenState extends State<TestScreen> {
       padding: const EdgeInsets.all(2.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.redAccent,
+          primary: Colors.redAccent,
         ),
-          onPressed: () => print(numString),//TODO
-          child: Text(numString, style: TextStyle(fontSize: 24.0),), ),
+        onPressed: () => print(numString), //TODO
+        child: Text(
+          numString,
+          style: TextStyle(fontSize: 24.0),
+        ),
+      ),
     );
   }
 
@@ -191,7 +203,7 @@ class _TestScreenState extends State<TestScreen> {
       child: SizedBox(
         width: double.infinity,
         child: RaisedButton(
-          onPressed: () => print(numString),
+          onPressed: () => null, //print(numString),
           child: Text(
             "答え合わせ",
             style: TextStyle(fontSize: 14.0),
@@ -220,8 +232,4 @@ class _TestScreenState extends State<TestScreen> {
       ),
     ); // TODO ここではあとで書き換える
   }
-
-
-
-
 }

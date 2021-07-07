@@ -23,7 +23,9 @@ class _TestScreenState extends State<TestScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(children: <Widget>[
+        body: Stack(
+            children: <Widget>[
+        Column(
           //スコア表示部分
           _scorePartU(),
           //問題表示部分
@@ -35,11 +37,26 @@ class _TestScreenState extends State<TestScreen> {
           //戻るボタン
           _backButton(),
           //
-        ]),
+
+    ),
+        //〇・×画像
+        _correctIncorrectImage(),
+              //テスト終了メッセージ
+              _endMessage(),
+      ],
+        ),
       ),
     );
   }
+ //TODO 〇・バツ画像
+  Widget _correctIncorrectImage() {
+    return Center(child: Image.asset("assets/images/pic_correct.png"));
+  }
 
+  //TODO テスト終了メッセージ
+  Widget _endMessage() {
+    return Text("テスト終了");
+  }
   //TODO スコア表示部分//156 動画
   Widget _scorePartU() {
     return Padding(
@@ -127,36 +144,44 @@ class _TestScreenState extends State<TestScreen> {
   //TODO 電卓ボタン部分
   Widget _calcButtons() {
     return Expanded(
-      child: Table(children: [
-        TableRow(children: [
-          _calcButton("7"),
-          _calcButton("8"),
-          _calcButton("9"),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 50.0 ),
+        child: Table(children: [
+          TableRow(children: [
+            _calcButton("7"),
+            _calcButton("8"),
+            _calcButton("9"),
+          ]),
+          TableRow(children: [
+            _calcButton("4"),
+            _calcButton("5"),
+            _calcButton("6"),
+          ]),
+          TableRow(children: [
+            _calcButton("1"),
+            _calcButton("2"),
+            _calcButton("3"),
+          ]),
+          TableRow(children: [
+            _calcButton("0"),
+            _calcButton("_"),
+            _calcButton("c"),
+          ]),
         ]),
-        TableRow(children: [
-          _calcButton("4"),
-          _calcButton("5"),
-          _calcButton("6"),
-        ]),
-        TableRow(children: [
-          _calcButton("1"),
-          _calcButton("2"),
-          _calcButton("3"),
-        ]),
-        TableRow(children: [
-          _calcButton("0"),
-          _calcButton("_"),
-          _calcButton("c"),
-        ]),
-      ]),
+      ),
     );
   }
 
   Widget _calcButton(String numString) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(primary: Colors.),
-        onPressed: null,//TODO
-        child: Text(numString, style: TextStyle(fontSize: 24.0),), );
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Colors.redAccent,
+        ),
+          onPressed: () => print(numString),//TODO
+          child: Text(numString, style: TextStyle(fontSize: 24.0),), ),
+    );
   }
 
 //TODO 答え合わせボタン
@@ -195,4 +220,8 @@ class _TestScreenState extends State<TestScreen> {
       ),
     ); // TODO ここではあとで書き換える
   }
+
+
+
+
 }

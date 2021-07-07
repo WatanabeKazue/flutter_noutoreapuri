@@ -38,8 +38,6 @@ class _TestScreenState extends State<TestScreen> {
                 _backButton(),
               ],
               //スコア表示部分
-
-              //
             ),
             //〇・×画像
             _correctIncorrectImage(),
@@ -53,16 +51,16 @@ class _TestScreenState extends State<TestScreen> {
 
   //TODO 〇・バツ画像
   Widget _correctIncorrectImage() {
-    if(isCorrectInCorrectImageEnabled == true){
-    return Center(child: Image.asset("assets/images/pic_correct.png"));
-  }else{
-      return Container();
-    }
-    }
+      return Center(child: Image.asset("assets/images/pic_correct.png"));
+  }
 
   //TODO テスト終了メッセージ
   Widget _endMessage() {
-    return Center(child: Text("テスト終了",style: TextStyle(fontSize: 40.0),));
+    return Center(
+        child: Text(
+      "テスト終了",
+      style: TextStyle(fontSize: 40.0),
+    ));
   }
 
   //TODO スコア表示部分//156 動画

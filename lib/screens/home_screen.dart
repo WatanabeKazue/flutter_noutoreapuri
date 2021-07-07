@@ -48,7 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             Image.asset("assets/images/image_title.png"),
             SizedBox(height: 16.0,),
-            Text("問題を選択して「スタート」ボタンを押してください"),
+            Text("問題を選択して「スタート」ボタンを押してください",
+            style: TextStyle(fontSize: 12.0),),
             //TODO プルダウン選択肢
             DropdownButton(
               items: _memuItems,

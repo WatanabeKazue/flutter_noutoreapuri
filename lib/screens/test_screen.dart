@@ -86,7 +86,13 @@ class _TestScreenState extends State<TestScreen> {
 
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
-    return Container();// TODO ここではあとで書き換える
+    return SizedBox(
+      width: double.infinity,
+      child: RaisedButton(
+      onPressed: null,
+      child: Text ("答え合わせ",style: TextStyle(fontSize: 14.0),),
+      ),
+    );// TODO ここではあとで書き換える
   }
 
   //TODO 戻る

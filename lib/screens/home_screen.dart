@@ -16,11 +16,23 @@ class _HomeScreenState extends State<HomeScreen> {
   int _numberOfQuestions = 0;
 
   @override
-  void initState() {
+  void initState() async{
+
     super.initState();
-    setMenuItems();
-    _numberOfQuestions = _memuItems[0].value!;
+    numberOfCorrect = 0;
+    correctRate = 0;
+    _numberOfQuestions = widget.numberOfQuestions;
   }
+
+  loadSound(String soundPath) {
+
+
+  }
+  //TODO 効果音の準備
+ initSounds()
+
+
+
 
   void setMenuItems() {
     //この中は、先生の動画と表示が違ってもOK
@@ -54,10 +66,13 @@ class _HomeScreenState extends State<HomeScreen> {
             DropdownButton(
               items: _memuItems,
               value: _numberOfQuestions,
-              onChanged: (int? selectedValue) {
+              onChanged: () => change(),
+
+                  (int? selectedValue) {
                 setState(() {
                   _numberOfQuestions = selectedValue!;
                 });
+                _numberOfQuestions = 50;
               },
             ),
             Expanded(
@@ -66,7 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.only(bottom: 16.0),
                 child: ElevatedButton.icon(
                   icon: Icon(Icons.skip_next),
-                  onPressed: () => startTestScreen(context),
+                  onPressed: () => print("ボタンの下で～"),
+                  //TODO
                   label: Text("スタート"),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.pink,
@@ -92,4 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
         context, MaterialPageRoute(builder: (context)
     => TestScreen(numberOfQuestions: _numberOfQuestions,)));
   }
+
+
 }

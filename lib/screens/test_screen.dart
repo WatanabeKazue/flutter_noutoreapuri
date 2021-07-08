@@ -20,6 +20,13 @@ class _TestScreenState extends State<TestScreen> {
   String answerString = "10";
 
   @override
+  void initState() {
+    super.initState();
+    numberOfCorrect = 0;
+    correctRate = 0;
+    widget.numberOfQuestions = 0;
+}
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

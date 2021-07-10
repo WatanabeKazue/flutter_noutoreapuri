@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     super.initState();
     setMenuItems();
-
+  _numberOfQuestions = _memuItems[0].value!;
 
   }
 
@@ -59,11 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
             DropdownButton(
               items: _memuItems,
               value: _numberOfQuestions,
-              onChanged: (int? selectedValue) {
+              onChanged: (int? Value) {
                 setState(() {
-                  _numberOfQuestions = selectedValue!;
+                  _numberOfQuestions = Value!;
                 });
-                _numberOfQuestions = 50;
               },
             ),
             Expanded(
@@ -72,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.only(bottom: 16.0),
                 child: ElevatedButton.icon(
                   icon: Icon(Icons.skip_next),
-                  onPressed: () => print("ボタンの下で～"),
+                  onPressed: () => startTestScreen(context),
                   //TODO
                   label: Text("スタート"),
                   style: ElevatedButton.styleFrom(

@@ -20,16 +20,22 @@ class _TestScreenState extends State<TestScreen> {
   String operator = "+";
   String answerString = "10";
 
+  Soundpool _soundpool;
   @override
-  void initState() {
+  void initState() async{
     super.initState();
     numberOfCorrect = 0;
     correctRate = 0;
     numberOfRemaining = widget.numberOfQuestions;
 
     //TODO 効果音の準備
+    initSounds();
+
     setQuestion();
-}
+ void initSounds() async{
+soundpool = Soundpool();
+ }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -213,7 +219,6 @@ class _TestScreenState extends State<TestScreen> {
         width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(primary: Colors.purpleAccent),
-          color: Colors.black,
           onPressed: () => null, //print(numString),
           child: Text("答え合わせ", style: TextStyle(fontSize: 14.0),
           ),
@@ -241,6 +246,12 @@ class _TestScreenState extends State<TestScreen> {
       ),
     ); // TODO ここではあとで書き換える
   }
+//TODO 問題を出す
+  void setQuestion() {
 
-  void setQuestion() {}
+  }
+
+  void initSounds() {
+  }
 }
+

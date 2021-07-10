@@ -208,14 +208,14 @@ class _TestScreenState extends State<TestScreen> {
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
       child: SizedBox(
         width: double.infinity,
-        child: RaisedButton(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(primary: Colors.purpleAccent),
+          color: Colors.black,
           onPressed: () => null, //print(numString),
-          child: Text(
-            "答え合わせ",
-            style: TextStyle(fontSize: 14.0),
+          child: Text("答え合わせ", style: TextStyle(fontSize: 14.0),
           ),
         ),
       ),

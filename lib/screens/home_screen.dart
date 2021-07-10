@@ -8,7 +8,7 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -19,17 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() async{
 
     super.initState();
-    numberOfCorrect = 0;
-    correctRate = 0;
-    _numberOfQuestions = widget.numberOfQuestions;
-  }
-
-  loadSound(String soundPath) {
+    setMenuItems();
 
 
   }
-  //TODO 効果音の準備
- initSounds()
 
 
 
@@ -66,9 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             DropdownButton(
               items: _memuItems,
               value: _numberOfQuestions,
-              onChanged: () => change(),
-
-                  (int? selectedValue) {
+              onChanged: (int? selectedValue) {
                 setState(() {
                   _numberOfQuestions = selectedValue!;
                 });

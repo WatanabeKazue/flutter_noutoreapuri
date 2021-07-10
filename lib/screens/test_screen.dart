@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soundpool/soundpool.dart';
 
 class TestScreen extends StatefulWidget {
   final numberOfQuestions;
@@ -24,7 +25,10 @@ class _TestScreenState extends State<TestScreen> {
     super.initState();
     numberOfCorrect = 0;
     correctRate = 0;
-    widget.numberOfQuestions = 0;
+    numberOfRemaining = widget.numberOfQuestions;
+
+    //TODO 効果音の準備
+    setQuestion();
 }
   @override
   Widget build(BuildContext context) {
@@ -237,4 +241,6 @@ class _TestScreenState extends State<TestScreen> {
       ),
     ); // TODO ここではあとで書き換える
   }
+
+  void setQuestion() {}
 }

@@ -20,9 +20,14 @@ class _TestScreenState extends State<TestScreen> {
   String operator = "+";
   String answerString = "10";
 
-  Soundpool _soundpool;
+  late Soundpool _soundpool;
+
+  int soundIdCorrect = 0;
+  int soundIdInCorrect = 0;
   @override
-  void initState() async{
+  void initState() async {
+    soundpool = Soundpool.fromOptions();
+
     super.initState();
     numberOfCorrect = 0;
     correctRate = 0;
@@ -32,8 +37,15 @@ class _TestScreenState extends State<TestScreen> {
     initSounds();
 
     setQuestion();
+  }
+
  void initSounds() async{
-soundpool = Soundpool();
+    _soundpool = Soundpool.fromOptions();
+    soundIdCorrect = await loadSound("assets/sounds/sound_correct.mp3");
+    soundIdInCorrect = await loadSound("assets/sounds/sound_correct.mp3");
+ }
+ loadSound(String s){
+
  }
 
   @override
@@ -251,7 +263,10 @@ soundpool = Soundpool();
 
   }
 
-  void initSounds() {
-  }
+  void ound(String s) {}
+
+
+
+
 }
 

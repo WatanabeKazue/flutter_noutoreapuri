@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _numberOfQuestions = 0;
 
   @override
-  void initState() async{
+  void initState() {
 
     super.initState();
     setMenuItems();

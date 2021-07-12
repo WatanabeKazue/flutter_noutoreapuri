@@ -59,9 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
             DropdownButton(
               items: _memuItems,
               value: _numberOfQuestions,
-              onChanged: (int? Value) {
+              onChanged: (int? value) {
                 setState(() {
-                  _numberOfQuestions = Value!;
+                  _numberOfQuestions = value!;
                 });
               },
             ),

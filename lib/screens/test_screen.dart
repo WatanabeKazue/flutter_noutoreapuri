@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
+
 
 class TestScreen extends StatefulWidget {
   final numberOfQuestions;
@@ -25,8 +27,8 @@ class _TestScreenState extends State<TestScreen> {
   int soundIdCorrect = 0;
   int soundIdInCorrect = 0;
   @override
-  void initState() async {
-    soundpool = Soundpool.fromOptions();
+  void initState() {
+    _soundpool = Soundpool.fromOptions();
 
     super.initState();
     numberOfCorrect = 0;
@@ -43,10 +45,20 @@ class _TestScreenState extends State<TestScreen> {
     _soundpool = Soundpool.fromOptions();
     soundIdCorrect = await loadSound("assets/sounds/sound_correct.mp3");
     soundIdInCorrect = await loadSound("assets/sounds/sound_correct.mp3");
- }
- loadSound(String s){
+    setState(() {
 
+    });
  }
+ Future<int>loadSound(String soundPath){
+   //TODO 163 テスト開始 途中
+   return rootBundle.load(soundPath).then((value) => _soundpool.load(value));
+ }
+
+ @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -230,6 +242,7 @@ class _TestScreenState extends State<TestScreen> {
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
+          //TODO 答え合わせボタン
           style: ElevatedButton.styleFrom(primary: Colors.purpleAccent),
           onPressed: () => null, //print(numString),
           child: Text("答え合わせ", style: TextStyle(fontSize: 14.0),

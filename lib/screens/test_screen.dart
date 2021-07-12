@@ -251,7 +251,7 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  inputAnswer(String numString) {}
+
 
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
@@ -309,6 +309,11 @@ class _TestScreenState extends State<TestScreen> {
     } else {
       operator = "-";
     }
-    setState(() {});
+    setState(() {
+
+    });
+  }
+  inputAnswer(String numString) {
+    //
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
@@ -26,6 +29,13 @@ class _TestScreenState extends State<TestScreen> {
 
   int soundIdCorrect = 0;
   int soundIdInCorrect = 0;
+
+  bool isCalcButtonsEnabled = false;
+  bool isAnswerCheckButtonEnabled = false;
+  bool isBackButtonEnabled = false;
+  bool isCorrectInCorrectImageEnabled = false;
+  bool isEndMessageEnabled = false;
+
   @override
   void initState() {
     _soundpool = Soundpool.fromOptions();
@@ -41,23 +51,26 @@ class _TestScreenState extends State<TestScreen> {
     setQuestion();
   }
 
- void initSounds() async{
-    _soundpool = Soundpool.fromOptions();
-    soundIdCorrect = await loadSound("assets/sounds/sound_correct.mp3");
-    soundIdInCorrect = await loadSound("assets/sounds/sound_correct.mp3");
-    setState(() {
+  void initSounds() async {
+    try {
+      _soundpool = Soundpool.fromOptions();
+      soundIdCorrect = await loadSound("assets/sounds/sound_correct.mp3");
+      soundIdInCorrect = await loadSound("assets/sounds/sound_correct.mp3");
+      setState(() {});
+    } on IOException catch (error) {
+      print("エラーの内容は：$error");
+    }
+  }
 
-    });
- }
- Future<int>loadSound(String soundPath){
-   //TODO 163 テスト開始 途中
-   return rootBundle.load(soundPath).then((value) => _soundpool.load(value));
- }
+  Future<int> loadSound(String soundPath) {
+    //TODO 163 テスト開始 途中
+    return rootBundle.load(soundPath).then((value) => _soundpool.load(value));
+  }
 
- @override
+  @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
+    _soundpool.dispose();
   }
 
   @override
@@ -92,16 +105,24 @@ class _TestScreenState extends State<TestScreen> {
 
   //TODO 〇・バツ画像
   Widget _correctIncorrectImage() {
+    if(isCorrectInCorrectImageEnabled == true){
       return Center(child: Image.asset("assets/images/pic_correct.png"));
+    } else {
+      return Container();
+    }
   }
 
   //TODO テスト終了メッセージ
   Widget _endMessage() {
-    return Center(
+    if (isEndMessageEnabled == true){
+      return Center(
         child: Text(
-      "テスト終了",
-      style: TextStyle(fontSize: 40.0),
-    ));
+          "テスト終了",
+          style: TextStyle(fontSize: 40.0),
+
+    } else{
+      return Container();
+    }
   }
 
   //TODO スコア表示部分//156 動画
@@ -113,37 +134,37 @@ class _TestScreenState extends State<TestScreen> {
             TableRow(children: [
               Center(
                   child: Text(
-                "のこり問題数",
-                style: TextStyle(fontSize: 10.0),
-              )),
+                    "のこり問題数",
+                    style: TextStyle(fontSize: 10.0),
+                  )),
               Center(
                   child: Text(
-                "正解数",
-                style: TextStyle(fontSize: 10.0),
-              )),
+                    "正解数",
+                    style: TextStyle(fontSize: 10.0),
+                  )),
               Center(
                   child: Text(
-                "正答率",
-                style: TextStyle(fontSize: 10.0),
-              )),
+                    "正答率",
+                    style: TextStyle(fontSize: 10.0),
+                  )),
             ]),
             TableRow(
               children: [
                 Center(
                     child: Text(
-                  numberOfRemaining.toString(),
-                  style: TextStyle(fontSize: 18.0),
-                )),
+                      numberOfRemaining.toString(),
+                      style: TextStyle(fontSize: 18.0),
+                    )),
                 Center(
                     child: Text(
-                  numberOfCorrect.toString(),
-                  style: TextStyle(fontSize: 18.0),
-                )),
+                      numberOfCorrect.toString(),
+                      style: TextStyle(fontSize: 18.0),
+                    )),
                 Center(
                     child: Text(
-                  correctRate.toString(),
-                  style: TextStyle(fontSize: 18.0),
-                )),
+                      correctRate.toString(),
+                      style: TextStyle(fontSize: 18.0),
+                    )),
               ],
             ),
           ],
@@ -226,7 +247,7 @@ class _TestScreenState extends State<TestScreen> {
         style: ElevatedButton.styleFrom(
           primary: Colors.redAccent,
         ),
-        onPressed: () => print(numString), //TODO
+        onPressed: () => inputAnswer(numString), //TODO
         child: Text(
           numString,
           style: TextStyle(fontSize: 24.0),
@@ -234,6 +255,8 @@ class _TestScreenState extends State<TestScreen> {
       ),
     );
   }
+  inputAnswer(String numString) {
+
 
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
@@ -271,9 +294,27 @@ class _TestScreenState extends State<TestScreen> {
       ),
     ); // TODO ここではあとで書き換える
   }
+
 //TODO 問題を出す
   void setQuestion() {
+ isCalcButtonsEnabled = true;
+ isAnswerCheckButtonEnabled = true;
+ isBackButtonEnabled = false;
+ isCorrectInCorrectImageEnabled = false;
+ isEndMessageEnabled = false;
 
+ Random random = Random();
+ questionLeft = random.nextInt(100) + 1;
+ questionRight = random.nextInt(100) + 1;
+
+ if (random.nextInt(2) + 1 == 1){
+   operator = "+";
+ } else {
+   operator = "-";
+ }
+ setState(() {
+
+ });
   }
 
   void ound(String s) {}

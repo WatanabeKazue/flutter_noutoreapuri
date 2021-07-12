@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
-
 class TestScreen extends StatefulWidget {
   final numberOfQuestions;
 
@@ -105,7 +104,7 @@ class _TestScreenState extends State<TestScreen> {
 
   //TODO 〇・バツ画像
   Widget _correctIncorrectImage() {
-    if(isCorrectInCorrectImageEnabled == true){
+    if (isCorrectInCorrectImageEnabled == true) {
       return Center(child: Image.asset("assets/images/pic_correct.png"));
     } else {
       return Container();
@@ -114,13 +113,9 @@ class _TestScreenState extends State<TestScreen> {
 
   //TODO テスト終了メッセージ
   Widget _endMessage() {
-    if (isEndMessageEnabled == true){
-      return Center(
-        child: Text(
-          "テスト終了",
-          style: TextStyle(fontSize: 40.0),
-
-    } else{
+    if (isEndMessageEnabled == true) {
+      return Center(child: Text("テスト終了", style: TextStyle(fontSize: 40.0)));
+    } else {
       return Container();
     }
   }
@@ -134,37 +129,37 @@ class _TestScreenState extends State<TestScreen> {
             TableRow(children: [
               Center(
                   child: Text(
-                    "のこり問題数",
-                    style: TextStyle(fontSize: 10.0),
-                  )),
+                "のこり問題数",
+                style: TextStyle(fontSize: 10.0),
+              )),
               Center(
                   child: Text(
-                    "正解数",
-                    style: TextStyle(fontSize: 10.0),
-                  )),
+                "正解数",
+                style: TextStyle(fontSize: 10.0),
+              )),
               Center(
                   child: Text(
-                    "正答率",
-                    style: TextStyle(fontSize: 10.0),
-                  )),
+                "正答率",
+                style: TextStyle(fontSize: 10.0),
+              )),
             ]),
             TableRow(
               children: [
                 Center(
                     child: Text(
-                      numberOfRemaining.toString(),
-                      style: TextStyle(fontSize: 18.0),
-                    )),
+                  numberOfRemaining.toString(),
+                  style: TextStyle(fontSize: 18.0),
+                )),
                 Center(
                     child: Text(
-                      numberOfCorrect.toString(),
-                      style: TextStyle(fontSize: 18.0),
-                    )),
+                  numberOfCorrect.toString(),
+                  style: TextStyle(fontSize: 18.0),
+                )),
                 Center(
                     child: Text(
-                      correctRate.toString(),
-                      style: TextStyle(fontSize: 18.0),
-                    )),
+                  correctRate.toString(),
+                  style: TextStyle(fontSize: 18.0),
+                )),
               ],
             ),
           ],
@@ -255,8 +250,8 @@ class _TestScreenState extends State<TestScreen> {
       ),
     );
   }
-  inputAnswer(String numString) {
 
+  inputAnswer(String numString) {}
 
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
@@ -268,7 +263,9 @@ class _TestScreenState extends State<TestScreen> {
           //TODO 答え合わせボタン
           style: ElevatedButton.styleFrom(primary: Colors.purpleAccent),
           onPressed: () => null, //print(numString),
-          child: Text("答え合わせ", style: TextStyle(fontSize: 14.0),
+          child: Text(
+            "答え合わせ",
+            style: TextStyle(fontSize: 14.0),
           ),
         ),
       ),
@@ -297,30 +294,21 @@ class _TestScreenState extends State<TestScreen> {
 
 //TODO 問題を出す
   void setQuestion() {
- isCalcButtonsEnabled = true;
- isAnswerCheckButtonEnabled = true;
- isBackButtonEnabled = false;
- isCorrectInCorrectImageEnabled = false;
- isEndMessageEnabled = false;
+    isCalcButtonsEnabled = true;
+    isAnswerCheckButtonEnabled = true;
+    isBackButtonEnabled = false;
+    isCorrectInCorrectImageEnabled = false;
+    isEndMessageEnabled = false;
 
- Random random = Random();
- questionLeft = random.nextInt(100) + 1;
- questionRight = random.nextInt(100) + 1;
+    Random random = Random();
+    questionLeft = random.nextInt(100) + 1;
+    questionRight = random.nextInt(100) + 1;
 
- if (random.nextInt(2) + 1 == 1){
-   operator = "+";
- } else {
-   operator = "-";
- }
- setState(() {
-
- });
+    if (random.nextInt(2) + 1 == 1) {
+      operator = "+";
+    } else {
+      operator = "-";
+    }
+    setState(() {});
   }
-
-  void ound(String s) {}
-
-
-
-
 }
-

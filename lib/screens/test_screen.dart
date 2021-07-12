@@ -314,6 +314,26 @@ class _TestScreenState extends State<TestScreen> {
     });
   }
   inputAnswer(String numString) {
-    //
+    //早期リターンを使う場合
+    setState(() {
+      if (numString == "C"){
+        answerString = "";
+        return;
+      }
+      if (numString == "-"){
+        if(answerString == "")answerString = "-";
+        return;
+      }
+      if (numString == "0"){
+        if(answerString != "0"&& answerString != "-")
+          answerString = answerString + numString;
+        return;
+      }
+      if (answerString == "0"){
+        answerString = numString;
+        return;
+      }
+      answerString = answerString + numString;
+    });
   }
 }

@@ -371,7 +371,7 @@ _answerCheck() {
   }
   correctRate = (numberOfCorrect / (widget.numberOfQuestions -  numberOfRemaining) * 100)
       .toInt();
-       100;
+
   correctRate =
       (numberOfCorrect ~/ (widget.numberOfQuestions -  numberOfRemaining) )
           * 100;
@@ -382,7 +382,7 @@ _answerCheck() {
     isBackButtonEnabled = true;
     isCorrectInCorrectImageEnabled = true;
     isEndMessageEnabled = true;
-
+//TODO 172
   }else{
     //TODO 残り問題数があるとき～
     Timer(Duration(seconds: 1),() => setQuestion());

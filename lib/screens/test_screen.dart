@@ -77,26 +77,30 @@ class _TestScreenState extends State<TestScreen> {
     return SafeArea(
       child: Scaffold(
         body: Stack(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                _scorePart(),
-                //問題表示部分
-                _questionPart(),
-                //電卓ボタン部分
-                _calcButtons(),
-                //答え合わせボタン
-                _answerCheckButton(),
-                //戻るボタン
-                _backButton(),
+          children: <Widget>[Scaffold(
+            body: Stack(
+              children: [
+                Column(
+                  children: <Widget>[
+                    _scorePart(),
+                    //問題表示部分
+                    _questionPart(),
+                    //電卓ボタン部分
+                    _calcButtons(),
+                    //答え合わせボタン
+                    _answerCheckButton(),
+                    //戻るボタン
+                    _backButton(),
+                  ],
+                  //スコア表示部分
+                ),
+                _correctIncorrectImage(),
+                //テスト終了メッセージ
+                 _endMessage(),
               ],
-              //スコア表示部分
             ),
             //〇・×画像
-            _correctIncorrectImage(),
-            //テスト終了メッセージ
-            _endMessage(),
-          ],
+
         ),
       ),
     );

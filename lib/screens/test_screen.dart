@@ -24,6 +24,8 @@ class _TestScreenState extends State<TestScreen> {
   String operator = "+";
   String answerString = "10";
 
+
+
   late Soundpool _soundpool;
 
   int soundIdCorrect = 0;
@@ -77,9 +79,6 @@ class _TestScreenState extends State<TestScreen> {
     return SafeArea(
       child: Scaffold(
         body: Stack(
-          children: <Widget>[Scaffold(
-            body: Stack(
-              children: [
                 Column(
                   children: <Widget>[
                     _scorePart(),
@@ -97,13 +96,10 @@ class _TestScreenState extends State<TestScreen> {
                 _correctIncorrectImage(),
                 //テスト終了メッセージ
                  _endMessage(),
-              ],
-            ),
-            //〇・×画像
-
+              ],//<Widget>[]
+          ),//〇・×画像
         ),
-      ),
-    );
+     );
   }
 
   //TODO 〇・バツ画像

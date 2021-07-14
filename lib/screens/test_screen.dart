@@ -24,6 +24,8 @@ class _TestScreenState extends State<TestScreen> {
   String operator = "+";
   String answerString = "10";
 
+
+
   late Soundpool _soundpool;
 
   int soundIdCorrect = 0;
@@ -35,6 +37,7 @@ class _TestScreenState extends State<TestScreen> {
   bool isCorrectInCorrectImageEnabled = false;
   bool isEndMessageEnabled = false;
   bool isCorrect = false;
+
 
   @override
   void initState() {
@@ -79,27 +82,27 @@ class _TestScreenState extends State<TestScreen> {
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                _scorePart(),
-                //問題表示部分
-                _questionPart(),
-                //電卓ボタン部分
-                _calcButtons(),
-                //答え合わせボタン
-                _answerCheckButton(),
-                //戻るボタン
-                _backButton(),
-              ],
-              //スコア表示部分
-            ),
-            _correctIncorrectImage(),
-            //テスト終了メッセージ
-            _endMessage(),
-          ], //<Widget>[]
-        ), //〇・×画像
-      ),
-    );
+                Column(
+                  children: <Widget>[
+                    _scorePart(),
+                    //問題表示部分
+                    _questionPart(),
+                    //電卓ボタン部分
+                    _calcButtons(),
+                    //答え合わせボタン
+                    _answerCheckButton(),
+                    //戻るボタン
+                    _backButton(),
+                  ],
+                  //スコア表示部分
+                ),
+                _correctIncorrectImage(),
+                //テスト終了メッセージ
+                 _endMessage(),
+              ],//<Widget>[]
+          ),//〇・×画像
+        ),
+     );
   }
 
   //TODO 〇・バツ画像
@@ -242,8 +245,7 @@ class _TestScreenState extends State<TestScreen> {
         style: ElevatedButton.styleFrom(
           primary: Colors.redAccent,
         ),
-        onPressed: isCalcButtonsEnabled ? () => inputAnswer(numString) : null,
-        //TODO
+        onPressed: isCalcButtonsEnabled ? () => inputAnswer(numString) : null, //TODO
         child: Text(
           numString,
           style: TextStyle(fontSize: 24.0),
@@ -251,6 +253,8 @@ class _TestScreenState extends State<TestScreen> {
       ),
     );
   }
+
+
 
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
@@ -261,8 +265,7 @@ class _TestScreenState extends State<TestScreen> {
         child: ElevatedButton(
           //TODO 答え合わせボタン
           style: ElevatedButton.styleFrom(primary: Colors.purpleAccent),
-          onPressed: isCalcButtonsEnabled ? () => _answerCheck() : null,
-          //print(numString),
+          onPressed: isCalcButtonsEnabled ? () => _answerCheck() : null, //print(numString),
           child: Text(
             "答え合わせ",
             style: TextStyle(fontSize: 14.0),
@@ -309,26 +312,27 @@ class _TestScreenState extends State<TestScreen> {
     } else {
       operator = "-";
     }
-    setState(() {});
-  }
+    setState(() {
 
+    });
+  }
   inputAnswer(String numString) {
     //早期リターンを使う場合
     setState(() {
-      if (numString == "C") {
+      if (numString == "C"){
         answerString = "";
         return;
       }
-      if (numString == "-") {
-        if (answerString == "") answerString = "-";
+      if (numString == "-"){
+        if(answerString == "")answerString = "-";
         return;
       }
-      if (numString == "0") {
-        if (answerString != "0" && answerString != "-")
+      if (numString == "0"){
+        if(answerString != "0"&& answerString != "-")
           answerString = answerString + numString;
         return;
       }
-      if (answerString == "0") {
+      if (answerString == "0"){
         answerString = numString;
         return;
       }
@@ -336,26 +340,47 @@ class _TestScreenState extends State<TestScreen> {
     });
   }
 
-  _answerCheck() {
-    if (answerString == "" || answerString == "-") {
-      return;
-    }
+
+_answerCheck() {
+  if (answerString == "" || answerString == "-"){
+    return;
+  }
+  isCalcButtonsEnabled = false;
+  isAnswerCheckButtonEnabled = false;
+  isBackButtonEnabled = false;
+  isCorrectInCorrectImageEnabled = true;
+  isEndMessageEnabled = false;
+
+  var myAnswer = int.parse(answerString).toInt();
+  var realAnswer = 0;
+  if (operator == "+") {
+    realAnswer = questionLeft + questionRight;
+  } else {
+    realAnswer = questionLeft - questionRight;
+  }
+
+  if (myAnswer == realAnswer){
+    isCorrect = true;
+    soundpool.play(soundIdCorrect);
+    numberOfCorrect += 1;
+
+  } else {
+    isCorrect = false;
+    soundpool.play(soundIdInCorrect);
+  }
+  correctRate = (numberOfCorrect / (widget.numberOfQuestions -  numberOfRemaining) * 100).toInt();
+
+  if(numberOfRemaining  == 0) {
+    //TODO 残り問題数がないとき～
     isCalcButtonsEnabled = false;
     isAnswerCheckButtonEnabled = false;
     isBackButtonEnabled = false;
     isCorrectInCorrectImageEnabled = true;
     isEndMessageEnabled = false;
 
-    var myAnswer = int.parse(answerString).toInt();
-    var realAnswer = 0;
-    if (operator == "+") {
-      realAnswer = questionLeft + questionRight;
-    } else {
-      realAnswer = questionLeft - questionRight;
-    }
-
-    if (myAnswer == realAnswer) {
-    } else {}
-    setState(() {});
+  }else{
+    //TODO 残り問題数があるとき～
+  }
+  setState(() {});
   }
 }

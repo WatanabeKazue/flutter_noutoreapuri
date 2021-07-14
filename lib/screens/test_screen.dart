@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
@@ -361,25 +362,30 @@ _answerCheck() {
 
   if (myAnswer == realAnswer){
     isCorrect = true;
-    soundpool.play(soundIdCorrect);
+    _soundpool.play(soundIdCorrect);
     numberOfCorrect += 1;
 
   } else {
     isCorrect = false;
-    soundpool.play(soundIdInCorrect);
+    _soundpool.play(soundIdInCorrect);
   }
-  correctRate = (numberOfCorrect / (widget.numberOfQuestions -  numberOfRemaining) * 100).toInt();
+  correctRate = (numberOfCorrect / (widget.numberOfQuestions -  numberOfRemaining) * 100)
+      .toInt();
+       100;
+  correctRate =
+      (numberOfCorrect ~/ (widget.numberOfQuestions -  numberOfRemaining) )
+          * 100;
 
   if(numberOfRemaining  == 0) {
     //TODO 残り問題数がないとき～
-    isCalcButtonsEnabled = false;
     isAnswerCheckButtonEnabled = false;
-    isBackButtonEnabled = false;
+    isBackButtonEnabled = true;
     isCorrectInCorrectImageEnabled = true;
-    isEndMessageEnabled = false;
+    isEndMessageEnabled = true;
 
   }else{
     //TODO 残り問題数があるとき～
+    Timer(Duration(seconds: 1),() => setQuestion());
   }
   setState(() {});
   }

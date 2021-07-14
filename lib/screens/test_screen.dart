@@ -36,6 +36,8 @@ class _TestScreenState extends State<TestScreen> {
   bool isBackButtonEnabled = false;
   bool isCorrectInCorrectImageEnabled = false;
   bool isEndMessageEnabled = false;
+  bool isCorrect = false;
+
 
   @override
   void initState() {
@@ -79,6 +81,7 @@ class _TestScreenState extends State<TestScreen> {
     return SafeArea(
       child: Scaffold(
         body: Stack(
+          children: <Widget>[
                 Column(
                   children: <Widget>[
                     _scorePart(),
@@ -242,7 +245,7 @@ class _TestScreenState extends State<TestScreen> {
         style: ElevatedButton.styleFrom(
           primary: Colors.redAccent,
         ),
-        onPressed: () => inputAnswer(numString), //TODO
+        onPressed: isCalcButtonsEnabled ? () => inputAnswer(numString) : null, //TODO
         child: Text(
           numString,
           style: TextStyle(fontSize: 24.0),
@@ -262,7 +265,7 @@ class _TestScreenState extends State<TestScreen> {
         child: ElevatedButton(
           //TODO 答え合わせボタン
           style: ElevatedButton.styleFrom(primary: Colors.purpleAccent),
-          onPressed: () => null, //print(numString),
+          onPressed: isCalcButtonsEnabled ? () => _answerCheck() : null, //print(numString),
           child: Text(
             "答え合わせ",
             style: TextStyle(fontSize: 14.0),
@@ -335,5 +338,34 @@ class _TestScreenState extends State<TestScreen> {
       }
       answerString = answerString + numString;
     });
+  }
+
+
+_answerCheck() {
+  if (answerString == "" || answerString == "-"){
+    return;
+  }
+  isCalcButtonsEnabled = false;
+  isAnswerCheckButtonEnabled = false;
+  isBackButtonEnabled = false;
+  isCorrectInCorrectImageEnabled = true;
+  isEndMessageEnabled = false;
+
+  var myAnswer = int.parse(answerString).toInt();
+  var realAnswer = 0;
+  if (operator == "+") {
+    realAnswer = questionLeft + questionRight;
+  } else {
+    realAnswer = questionLeft - questionRight;
+  }
+
+  if (myAnswer == realAnswer){
+
+  } else {
+
+  }
+  setState(() {
+
+  });
   }
 }

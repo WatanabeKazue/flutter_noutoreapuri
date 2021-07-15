@@ -286,7 +286,7 @@ class _TestScreenState extends State<TestScreen> {
           style: ElevatedButton.styleFrom(
             primary: Colors.purple,
           ),
-          onPressed: null, //TODO
+          onPressed: isBackButtonEnabled ? () => closeTestScreen() : null, //TODO
           child: Text(
             "もどる",
             style: TextStyle(fontSize: 14.0),
@@ -303,6 +303,8 @@ class _TestScreenState extends State<TestScreen> {
     isBackButtonEnabled = false;
     isCorrectInCorrectImageEnabled = false;
     isEndMessageEnabled = false;
+    isCorrect = false;
+    answerString = "";
 
     Random random = Random();
     questionLeft = random.nextInt(100) + 1;
@@ -388,5 +390,8 @@ _answerCheck() {
     Timer(Duration(seconds: 1),() => setQuestion());
   }
   setState(() {});
+  }
+  closeTestScreen(BuildContext co){
+    Navigator.pop(context);
   }
 }

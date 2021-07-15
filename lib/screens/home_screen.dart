@@ -59,11 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
             DropdownButton(
               items: _memuItems,
               value: _numberOfQuestions,
-              onChanged: (int? value) {
-                setState(() {
-                  _numberOfQuestions = value!;
-                });
-              },
+              //null safety(T?なので型指定必要)
+              //final ValueChanged<T?>? onChanged
+              //https://api.flutter.dev/flutter/material/DropdownButton-class.
+              onChanged: (int? value) => changeDropdownItem (value!),
             ),
             Expanded(
               child: Container(
@@ -92,10 +91,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  changeDropdownItem(int? value) {
+    setState(() {
+      _numberOfQuestions = (value != null) ? value : 10;
+
+    });
+  }
+
+
+
 
   startTestScreen(BuildContext context) {
     Navigator.push(
-        context,
+        contevaxt,
         MaterialPageRoute(
             builder: (context) => TestScreen(
       numberOfQuestions: _numberOfQuestions,

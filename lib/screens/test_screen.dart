@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
 class TestScreen extends StatefulWidget {
-  final numberOfQuestions;
+  final int numberOfQuestions;
 
-  TestScreen({this.numberOfQuestions});
+  TestScreen({required this.numberOfQuestions});
 
   @override
   _TestScreenState createState() => _TestScreenState();
@@ -25,8 +25,6 @@ class _TestScreenState extends State<TestScreen> {
   String operator = "+";
   String answerString = "10";
 
-
-
   late Soundpool _soundpool;
 
   int soundIdCorrect = 0;
@@ -38,7 +36,6 @@ class _TestScreenState extends State<TestScreen> {
   bool isCorrectInCorrectImageEnabled = false;
   bool isEndMessageEnabled = false;
   bool isCorrect = false;
-
 
   @override
   void initState() {
@@ -83,33 +80,38 @@ class _TestScreenState extends State<TestScreen> {
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    _scorePart(),
-                    //問題表示部分
-                    _questionPart(),
-                    //電卓ボタン部分
-                    _calcButtons(),
-                    //答え合わせボタン
-                    _answerCheckButton(),
-                    //戻るボタン
-                    _backButton(),
-                  ],
-                  //スコア表示部分
-                ),
-                _correctIncorrectImage(),
-                //テスト終了メッセージ
-                 _endMessage(),
-              ],//<Widget>[]
-          ),//〇・×画像
-        ),
-     );
+            Column(
+              children: <Widget>[
+                _scorePart(),
+                //問題表示部分
+                _questionPart(),
+                //電卓ボタン部分
+                _calcButtons(),
+                //答え合わせボタン
+                _answerCheckButton(),
+                //戻るボタン
+                _backButton(),
+              ],
+              //スコア表示部分
+            ),
+            _correctIncorrectImage(),
+            //テスト終了メッセージ
+            _endMessage(),
+          ], //<Widget>[]
+        ), //〇・×画像
+      ),
+    );
   }
 
   //TODO 〇・バツ画像
   Widget _correctIncorrectImage() {
     if (isCorrectInCorrectImageEnabled == true) {
-      return Center(child: Image.asset("assets/images/pic_correct.png"));
+      if (isCorrect) {
+        return Center(child: Image.asset("assets/images/pic_correct.png"));
+      } else {
+        return Center(child: Image.asset("assets/images/pic_incorrect.png"));
+      }
+
     } else {
       return Container();
     }
@@ -133,37 +135,37 @@ class _TestScreenState extends State<TestScreen> {
             TableRow(children: [
               Center(
                   child: Text(
-                "のこり問題数",
-                style: TextStyle(fontSize: 10.0),
-              )),
+                    "のこり問題数",
+                    style: TextStyle(fontSize: 10.0),
+                  )),
               Center(
                   child: Text(
-                "正解数",
-                style: TextStyle(fontSize: 10.0),
-              )),
+                    "正解数",
+                    style: TextStyle(fontSize: 10.0),
+                  )),
               Center(
                   child: Text(
-                "正答率",
-                style: TextStyle(fontSize: 10.0),
-              )),
+                    "正答率",
+                    style: TextStyle(fontSize: 10.0),
+                  )),
             ]),
             TableRow(
               children: [
                 Center(
                     child: Text(
-                  numberOfRemaining.toString(),
-                  style: TextStyle(fontSize: 18.0),
-                )),
+                      numberOfRemaining.toString(),
+                      style: TextStyle(fontSize: 18.0),
+                    )),
                 Center(
                     child: Text(
-                  numberOfCorrect.toString(),
-                  style: TextStyle(fontSize: 18.0),
-                )),
+                      numberOfCorrect.toString(),
+                      style: TextStyle(fontSize: 18.0),
+                    )),
                 Center(
                     child: Text(
-                  correctRate.toString(),
-                  style: TextStyle(fontSize: 18.0),
-                )),
+                      correctRate.toString(),
+                      style: TextStyle(fontSize: 18.0),
+                    )),
               ],
             ),
           ],
@@ -231,7 +233,7 @@ class _TestScreenState extends State<TestScreen> {
           ]),
           TableRow(children: [
             _calcButton("0"),
-            _calcButton("_"),
+            _calcButton("-"),
             _calcButton("c"),
           ]),
         ]),
@@ -246,7 +248,8 @@ class _TestScreenState extends State<TestScreen> {
         style: ElevatedButton.styleFrom(
           primary: Colors.redAccent,
         ),
-        onPressed: isCalcButtonsEnabled ? () => inputAnswer(numString) : null, //TODO
+        onPressed: isCalcButtonsEnabled ? () => inputAnswer(numString) : null,
+        //TODO
         child: Text(
           numString,
           style: TextStyle(fontSize: 24.0),
@@ -254,8 +257,6 @@ class _TestScreenState extends State<TestScreen> {
       ),
     );
   }
-
-
 
 //TODO 答え合わせボタン
   Widget _answerCheckButton() {
@@ -266,7 +267,8 @@ class _TestScreenState extends State<TestScreen> {
         child: ElevatedButton(
           //TODO 答え合わせボタン
           style: ElevatedButton.styleFrom(primary: Colors.purpleAccent),
-          onPressed: isCalcButtonsEnabled ? () => _answerCheck() : null, //print(numString),
+          onPressed: isCalcButtonsEnabled ? () => _answerCheck() : null,
+          //print(numString),
           child: Text(
             "答え合わせ",
             style: TextStyle(fontSize: 14.0),
@@ -315,27 +317,26 @@ class _TestScreenState extends State<TestScreen> {
     } else {
       operator = "-";
     }
-    setState(() {
-
-    });
+    setState(() {});
   }
+
   inputAnswer(String numString) {
     //早期リターンを使う場合
     setState(() {
-      if (numString == "C"){
+      if (numString == "c") {
         answerString = "";
         return;
       }
-      if (numString == "-"){
-        if(answerString == "")answerString = "-";
+      if (numString == "-") {
+        if (answerString == "") answerString = "-";
         return;
       }
-      if (numString == "0"){
-        if(answerString != "0"&& answerString != "-")
+      if (numString == "0") {
+        if (answerString != "0" && answerString != "-")
           answerString = answerString + numString;
         return;
       }
-      if (answerString == "0"){
+      if (answerString == "0") {
         answerString = numString;
         return;
       }
@@ -343,55 +344,54 @@ class _TestScreenState extends State<TestScreen> {
     });
   }
 
-
-_answerCheck() {
-  if (answerString == "" || answerString == "-"){
-    return;
-  }
-  isCalcButtonsEnabled = false;
-  isAnswerCheckButtonEnabled = false;
-  isBackButtonEnabled = false;
-  isCorrectInCorrectImageEnabled = true;
-  isEndMessageEnabled = false;
-
-  var myAnswer = int.parse(answerString).toInt();
-  var realAnswer = 0;
-  if (operator == "+") {
-    realAnswer = questionLeft + questionRight;
-  } else {
-    realAnswer = questionLeft - questionRight;
-  }
-
-  if (myAnswer == realAnswer){
-    isCorrect = true;
-    _soundpool.play(soundIdCorrect);
-    numberOfCorrect += 1;
-
-  } else {
-    isCorrect = false;
-    _soundpool.play(soundIdInCorrect);
-  }
-  correctRate = (numberOfCorrect / (widget.numberOfQuestions -  numberOfRemaining) * 100)
-      .toInt();
-
-  correctRate =
-      (numberOfCorrect ~/ (widget.numberOfQuestions -  numberOfRemaining) )
-          * 100;
-
-  if(numberOfRemaining  == 0) {
-    //TODO 残り問題数がないとき～
+  _answerCheck() {
+    if (answerString == "" || answerString == "-") {
+      return;
+    }
+    isCalcButtonsEnabled = false;
     isAnswerCheckButtonEnabled = false;
-    isBackButtonEnabled = true;
+    isBackButtonEnabled = false;
     isCorrectInCorrectImageEnabled = true;
-    isEndMessageEnabled = true;
+    isEndMessageEnabled = false;
+
+    numberOfRemaining = numberOfRemaining - 1;
+
+    var myAnswer = int.parse(answerString).toInt();
+    var realAnswer = 0;
+    if (operator == "+") {
+      realAnswer = questionLeft + questionRight;
+    } else {
+      realAnswer = questionLeft - questionRight;
+    }
+
+    if (myAnswer == realAnswer) {
+      isCorrect = true;
+      _soundpool.play(soundIdCorrect);
+      numberOfCorrect += 1;
+    } else {
+      isCorrect = false;
+      _soundpool.play(soundIdInCorrect);
+    }
+
+    correctRate =
+        (numberOfCorrect / (widget.numberOfQuestions - numberOfRemaining) * 100)
+            .toInt();
+
+    if (numberOfRemaining == 0) {
+      //TODO 残り問題数がないとき～
+      isAnswerCheckButtonEnabled = false;
+      isBackButtonEnabled = true;
+      isCorrectInCorrectImageEnabled = true;
+      isEndMessageEnabled = true;
 //TODO 172
-  }else{
-    //TODO 残り問題数があるとき～
-    Timer(Duration(seconds: 1),() => setQuestion());
+    } else {
+      //TODO 残り問題数があるとき～
+      Timer(Duration(seconds: 1), () => setQuestion());
+    }
+    setState(() {});
   }
-  setState(() {});
-  }
-  closeTestScreen(BuildContext co){
+
+  closeTestScreen(BuildContext co) {
     Navigator.pop(context);
   }
 }

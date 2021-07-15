@@ -286,7 +286,7 @@ class _TestScreenState extends State<TestScreen> {
           style: ElevatedButton.styleFrom(
             primary: Colors.purple,
           ),
-          onPressed: isBackButtonEnabled ? () => closeTestScreen() : null, //TODO
+          onPressed: isBackButtonEnabled ? () => closeTestScreen : null, //TODO
           child: Text(
             "もどる",
             style: TextStyle(fontSize: 14.0),

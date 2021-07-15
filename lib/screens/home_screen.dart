@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   startTestScreen(BuildContext context) {
     Navigator.push(
-        contevaxt,
+        context,
         MaterialPageRoute(
             builder: (context) => TestScreen(
       numberOfQuestions: _numberOfQuestions,
